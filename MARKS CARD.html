@@ -1,0 +1,126 @@
+<html>
+
+<head>
+    <title>document</title>
+    <script>
+        function dopercentage() {
+            percent = (parseFloat(vcStr) + parseFloat(vjStr) + parseFloat(vwStr)) / 3;
+            document.getElementById("txtpercentage").value = percent;
+        }
+
+        function dograde() {
+            var gar = "";
+            if (percent >= 90) {
+                gar = "A";
+            }
+            if (percent >= 80 && percent < 90) {
+                gar = "B";
+            }
+            if (percent >= 70 && percent < 80) {
+                gar = "C";
+            }
+            if (percent >= 60 && percent < 70) {
+                gar = "D";
+            }
+            if (percent >= 40 && percent < 60) {
+                gar = "E";
+            }
+            if(percent>=0 && percent<40){
+                gar="f";
+                
+            }
+
+            document.getElementById("txtgrade").value = gar;
+        }
+
+        function dototal(errC,errJ,errW) {
+            vcStr = document.getElementById("txtC").value;
+            vjStr = document.getElementById("txtJ").value;
+            vwStr = document.getElementById("txtW").value;
+            if (errC.innerHTML=="" && errJ.innerHTML=="" && errW.innerHTML=="") {
+                var tot=parseFloat(vcStr) + parseFloat(vjStr) + parseFloat(vwStr);
+                document.getElementById("txttotal").value = tot;
+            } else {
+                alert("fill the data");
+                document.getElementById("txttotal").value ="";
+            }
+
+        }
+
+        function chkdata(txt, spn) {
+            if (txt.value=="") {
+                spn.innerhtml="fill the data";
+            }
+            else
+                if (parseFloat(txt.value)>=100) {
+                spn.innerhtml="must be less than 100";
+            }
+            else
+                if (isNaN(txt.value)) {
+                spn.innerhtml = "must be numeric";
+            } else {
+                spn.innerhtml = "";
+            }
+        }
+
+        function doclear() {
+            document.getElementById("txtC").value = "";
+            document.getElementById("txtJ").value = "";
+            document.getElementById("txtW").value = "";
+            document.getElementById("txttotal").value="";
+            document.getElementById("txtpercentage").value="";
+            document.getElementById("txtgrade").value = "";
+        }
+    </script>
+</head>
+
+<body>
+    <center>
+        <form>
+        <table width="600" height="500" border="1" >
+            <tr >
+                <td align="center" colspan="2">
+                    <font size="9" color="orange" face="BankGothic Md BT"><b>MARKS CARD</b></font>
+                </td>
+            </tr>
+            <br><br>
+            <tr align="center">
+                <td><b>C++</b></td>
+                <td><input type="text" id="txtC" onblur="chkdata(this,errC);"></td>
+                <td>
+                    <span id="errC"></span></td>
+            </tr>
+            <tr align="center">
+                <td><b>JAVA</b></td>
+                <td><input type="text" id="txtJ" onblur="chkdata(this,errJ);"></td>
+                <td>
+                    <span id="errJ"></span></td>
+            </tr >
+            <tr align="center">
+                <td><b>WEB</b></td>
+                <td><input type="text" id="txtW" onblur="chkdata(this,errW);"></td>
+                <td>
+                    <span id="errW"></span></td>
+            </tr>
+            <tr align="center">
+                <td colspan="2" align="center">
+                    <input type="button" value="Total" onclick="dototal(errC,errJ,errW);">
+                    <input type="button" value="Percentage" onclick="dopercentage();">
+                    <input type="button" value="Grade" onclick="dograde();">
+                    <input type="reset" value="Clear">
+                </td>
+            </tr>
+            <tr align="center">
+            <td><b>TOTAL</b></td>
+            <td><b><input type="text" id="txttotal" disabled></b></td></tr>
+            <tr align="center">
+            <td><b>PERCENTAGE</b></td>
+            <td><input type="text" id="txtpercentage" disabled></td></tr>
+            <tr align="center">
+            <td><b>GRADE</b></td>
+            <td><input type="text" id="txtgrade"></td></tr>
+        </table>
+                        </form>
+
+    </center>
+</body></html>
